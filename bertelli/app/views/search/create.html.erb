@@ -1,2 +1,18 @@
-<h1>Search#create</h1>
-<p>Find me in app/views/search/create.html.erb</p>
+<h2>Results</h2>
+
+<p>Your query was <%= @query %></p>
+
+<table>
+
+<% @performers["performers"].each do |performer| %>
+	<tr>
+		<td>
+			<%= performer["name"] %>
+		</td>
+		
+		<td>
+		  Add to my list
+		</td>
+	</tr>
+<% end %>
+</table>
