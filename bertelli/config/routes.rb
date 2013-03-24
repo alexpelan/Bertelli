@@ -1,6 +1,10 @@
 Bertelli::Application.routes.draw do
 
 
+  controller :recommendations do
+  	get 'recommendations' => :list
+  end
+
   controller :search do
   	get 'search' => :new
   	post 'search' => :create
