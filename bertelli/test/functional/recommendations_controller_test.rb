@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class RecommendationsControllerTest < ActionController::TestCase
-  test "should get list" do
-    get :list
+  test "should get new" do
+    get :new
     assert_response :success
   end
 

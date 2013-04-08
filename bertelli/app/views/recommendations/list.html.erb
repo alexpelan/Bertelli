@@ -1,3 +1,10 @@
 <h1>Recommendations</h1>
 
-<%= debug @recommendations %>
+<% @weekends.each do |weekend| %>
+
+	A weekend we found:<br/>
+	<% weekend.each do |event| %>
+		<%= event["event"]["title"] %> <br/>	
+	<% end %>
+
+<% end %>

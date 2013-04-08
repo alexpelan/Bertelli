@@ -1,0 +1,9 @@
+<h1>Recommendations</h1>
+
+<%= form_tag do %>
+<div>
+  <%= label_tag :postal_code, 'Enter the postal code of where you want to visit:' %>
+  <%= text_field_tag :postal_code, params[:postal_code] %>
+   <%= submit_tag "Search" %>
+</div>
+<% end %>
