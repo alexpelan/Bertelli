@@ -1,10 +1,12 @@
 <h1>Recommendations</h1>
 
+<table>
 <% @weekends.each do |weekend| %>
 
-	A weekend we found:<br/>
+  <b><%= calculate_date_string(weekend.first["event"]["datetime_local"]) %></b><br/>
 	<% weekend.each do |event| %>
 		<%= event["event"]["title"] %> <br/>	
 	<% end %>
 
-<% end %>
+<% end %>	
+</table>
