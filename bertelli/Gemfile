@@ -24,6 +24,8 @@ gem 'jquery-rails'
 
 gem 'json'
 
+gem 'tabs_on_rails'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -38,3 +40,5 @@ gem 'json'
 
 # To use debugger
 # gem 'debugger'
+
+

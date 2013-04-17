@@ -2,11 +2,18 @@
 
 <table>
 <% @weekends.each do |weekend| %>
-
-  <b><%= calculate_date_string(weekend.first["event"]["datetime_local"]) %></b><br/>
-	<% weekend.each do |event| %>
-		<%= event["event"]["title"] %> <br/>	
-	<% end %>
-
+	<tr>
+	  <b><%= calculate_date_string(weekend.first["event"]["datetime_local"]) %></b><br/>
+	  <table>
+			<% weekend.each do |event| %>
+				<tr>
+					 <td> <%= event["event"]["title"] %> </td>
+					 <td> <%= Date.parse(event["event"]["datetime_local"]) %> </td>
+					 <td> <%= link_to event["event"]["venue"]["name"], event["event"]["venue"]["url"] %> </td>
+					 <td> <%= link_to "Buy tickets on Seatgeek", event["event"]["url"] %> </td>
+				</tr>
+			<% end %>
+		</table>
+	</tr>
 <% end %>	
 </table>
