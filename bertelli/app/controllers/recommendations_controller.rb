@@ -1,6 +1,8 @@
 require 'open-uri'
 
 class RecommendationsController < ApplicationController
+	set_tab :recommendations
+
   def list
   	@bucket = current_bucket
   	#todo -  do something if they haven't added anything
