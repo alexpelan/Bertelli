@@ -1,5 +1,16 @@
-<p id="notice"><%= notice %></p>
+<h2>Your Interests</h2>
 
+<table>
 
-<%= link_to 'Edit', edit_bucket_path(@bucket) %> |
-<%= link_to 'Back', buckets_path %>
+<th>Performer</th> <th></th> <th>Buy tickets</th>
+<% @performers.each do |performer| %>
+<tr>
+	<td> <%= performer.name %> </td>
+	<td> <%= image_tag(performer.image_url, :height=> '32', :width => '32') %> </td>
+	<td> <%= link_to "Buy tickets on Seatgeek", performer.ticket_url %> </td>
+</tr>
+<% end %>
+
+</table>
+
+<%= link_to 'Search', search_path %> 

@@ -14,6 +14,13 @@ class BucketsController < ApplicationController
   # GET /buckets/1.json
   def show
     @bucket = Bucket.find(params[:id])
+    	   	@performers = Array.new
+    	   	
+    	   	#load up performer data for display
+    	   	@bucket.line_items.each do | line_item | 
+    	   		@performers.push(Performer.find(line_item.performer_id))
+    	   	end
+    		
 
     respond_to do |format|
       format.html # show.html.erb

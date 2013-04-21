@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 	#look in the session to see if a bucket exists and grab it. If it doesn't create one.
 	def current_bucket
 		Bucket.find(session[:bucket_id])
-	rescue ActiveRecord::RecordNotFound
+	     rescue ActiveRecord::RecordNotFound
 		bucket = Bucket.create
 		session[:bucket_id] = bucket.id
 		bucket

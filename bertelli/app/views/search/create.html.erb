@@ -11,7 +11,7 @@
 		</td>
 		
 		<td>
-		  <%= link_to 'Add to my interests', line_items_path(performer_id: performer["id"]), :method => :post %>
+		  <%= link_to 'Add to my interests', line_items_path(performer_id: performer["id"], name: performer["name"], ticket_url:performer["url"], image_url: performer["images"]["medium"]), :method => :post %>
 		</td>
 	</tr>
 <% end %>

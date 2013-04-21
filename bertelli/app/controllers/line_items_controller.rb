@@ -41,16 +41,35 @@ class LineItemsController < ApplicationController
   # POST /line_items.json
   def create
     @bucket = current_bucket
+    #get values from URL
     performer_id = params[:performer_id]
+    name = params[:name]
+    ticket_url = params[:ticket_url]
+    image_url = params[:image_url]
+    #look up performer by ID, if it doesn't already exist then create one
+    begin
+    	performer = Performer.find(performer_id)
+	  rescue ActiveRecord::RecordNotFound
+	 		performer = Performer.new
+			performer.id = performer_id
+		end
+		
+		performer.name = name
+		performer.ticket_url = ticket_url
+		performer.image_url = image_url
+		performer.save
+	
+		
+		
     @line_item = @bucket.line_items.build
     @line_item.performer_id = performer_id
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item, notice: 'Line item was successfully created.' }
-        format.json { render json: @line_item, status: :created, location: @line_item }
+        format.html { redirect_to @bucket, notice: 'Line item was successfully created.' }
+        format.json { render json: @bucket, status: :created, location: @bucket}
       else
-        format.html { render action: "new" }
+        format.html { render action: "http://www.google.com" }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end

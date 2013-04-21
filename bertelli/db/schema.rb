@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304041822) do
+ActiveRecord::Schema.define(:version => 20130421201636) do
 
   create_table "buckets", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20130304041822) do
 
   create_table "performers", :force => true do |t|
     t.string   "name"
+    t.string   "ticket_url"
+    t.string   "image_url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

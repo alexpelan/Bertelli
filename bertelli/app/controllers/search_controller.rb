@@ -1,5 +1,6 @@
 require 'open-uri'
 
+#TODO: SearchController should become plural at some point - maybe change name to InterestsController?
 class SearchController < ApplicationController
 	set_tab :search
 
