@@ -9,15 +9,18 @@
 <body class="<%= controller.controller_name %>">
 
 	<div id="wrapper">
-	
-	<%= tabs_tag :open_tabs => { :id=>"tabs" } do |tab| %>
-		<%= tab.home 'Home', home_path %>
-		<%= tab.interests 'Add Interests', search_path %>
-		<%= tab.recommendations 'Recommendations', recommendations_path %>
-	<% end %>
-	
+		
 
 		<div id="main">
+		
+			<div id="centeredtabs">
+			  <%= tabs_tag :open_tabs => { :id=>"tabs" } do |tab| %>
+					<%= tab.home 'Home', home_path %>
+					<%= tab.search 'Add Interests', search_path %>
+					<%= tab.recommendations 'Recommendations', recommendations_path %>
+			  <% end %>	
+		  </div>
+		
 			<%= yield %>
 		</div>
 		

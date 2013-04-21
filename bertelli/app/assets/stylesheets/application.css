@@ -28,47 +28,65 @@ div#wrapper {
 
 /* tabs */
 
-#tabs{
-	position:relative;
-	margin-left:auto;
-	margin-right:auto;
+div#centeredtabs{
+	float:left;
 	width:100%;
-	padding: 0 0 1.75em 1em;
-	margin:0;
-	list-style:none	
+	overflow:hidden;
+	position:relative;
 }
 
-#tabs li{
-	float:left;
+#centeredtabs ul{
+	position:relative;
 	margin:0;
-	padding:0;	
+	padding:0;
+	list-style:none;
+	clear:left;
+	float:left;
+	left:50%;	
+	text-align:center;
+}
+
+#centeredtabs ul li{
+	display:block;
+	float:left;
+	list-style:none;
+	margin:0;
+	padding:0;
+	position:relative;
+	right:50%;
+	font-size:18px;
 }
 
 /*currently selected*/
-#tabs li.current{
+#centeredtabs ul li.current{
 	background:#FFFFFF;
 	font-weight:bold;
 	border-top:1px solid #aaa;
 	border-left:1px solid #aaa;
 	border-right:1px solid #aaa;
-	padding: 0.25em 1em;
+	padding: 1em 1em;
 	margin:0;
 	border-bottom:none;
 		
 }
 
-#tabs a{
+#centeredtabs ul li a{
 	display:block;
 	color:#444;
 	text-decoration:none;
 	font-weight:bold;
 	background:#ddd;
 	margin:0;
-	padding:0.25 em 1em;
+	padding:1em 1em;
 	border:1px solid #aaa;
 }	
 	
-#tabs a:hover,
-#tabs a:active{
+#centeredtabs ul li a:hover,
+#centeredtabs ul li a:active{
 	background:#bbb;	
 }
+
+div#main{
+	margin-top:30px	
+}
+

@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class SearchController < ApplicationController
-	set_tab :interests
+	set_tab :search
 
   def new
   end
