@@ -5,5 +5,8 @@
   <%= label_tag :postal_code, 'Enter the postal code of where you want to visit:' %>
   <%= text_field_tag :postal_code, params[:postal_code] %>
    <%= submit_tag "Search" %>
+   
 </div>
 <% end %>
+
+Or: <%=button_to "I'll go anywhere", :action=> "list" %>
