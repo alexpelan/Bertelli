@@ -10,6 +10,7 @@
 					 <td> <%= event["event"]["title"] %> </td>
 					 <td> <%= Date.parse(event["event"]["datetime_local"]) %> </td>
 					 <td> <%= link_to event["event"]["venue"]["name"], event["event"]["venue"]["url"] %> </td>
+					 <td> <%= event["event"]["venue"]["city"] %> </td>
 					 <td> <%= link_to "Buy tickets on Seatgeek", event["event"]["url"] %> </td>
 				</tr>
 			<% end %>

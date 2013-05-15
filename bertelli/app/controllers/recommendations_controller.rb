@@ -30,8 +30,9 @@ class RecommendationsController < ApplicationController
   	
   	
   	delimiter = ""
+  	response = "{\"areas\":["
   	if @ill_go_anywhere_mode
-  		response = "{\"areas\":["
+  		
   		CITIES.each_value do |postal_code|
   			city_query_string = query_string + performers_string + "&postal_code="+ postal_code + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=50"
   			file = open(city_query_string)
@@ -41,18 +42,18 @@ class RecommendationsController < ApplicationController
   			file.close
   			
   		end
-  		
-  		response = response + "]}"
-  		
+  			
   	else
 	  	query_string = query_string + performers_string + postal_code_string + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=150"
 	  	
 	  	@str = query_string
 	  	file = open(query_string)
-	  	response = file.read
+	  	temp_response = file.read
+	  	response = response + temp_response
 	  	
 	  end
 	 
+	  response = response + "]}"
 	  
 	  @recommendations = JSON.parse(response)
 	  
@@ -77,7 +78,7 @@ class RecommendationsController < ApplicationController
    	#if they didn't provide a zip code, now we have to search through weekends to see if any events are in the same general area
    	if @ill_go_anywhere_mode 
    		#let's go with...50 miles? left off here - this isn't working.
-   		#@weekends = group_by_location(@weekends, 2, 50)	
+   		@weekends = group_by_location(@weekends, 2, 50)	
    		#logger.debug("returned wknds size = " + @weekends.size.to_s())
    	end
    	
@@ -85,6 +86,9 @@ class RecommendationsController < ApplicationController
   
   def new
   end
+  
+  
+  
   
   #not I18N'ed - assumes a Fri/Sat/Sun weekend
   def is_the_freakin_weekend(date)
@@ -108,8 +112,6 @@ class RecommendationsController < ApplicationController
   	
   	#iterate through hash in date order
   	sorted_events.each do |event, event_date|
-  		
-  		logger.debug("event = " + event["event"]["title"] + " date = " + event_date.to_s())
   		
   		#if this isn't the first event within a weekend, check if this event is within 2 days of the previous one
   		#if it is, it's part of that weekend (and can't be part of the next weekend, because math)
@@ -151,44 +153,56 @@ class RecommendationsController < ApplicationController
   def group_by_location(weekends,minimum_number_of_events,range_in_miles)
   	location_weekends = Array.new
   	new_location_group = Array.new
+  	already_grouped_event_indices = Hash.new
   	
   	#loop through - should be a small amount of events so we can probably just compare every event with every other one 
   	#as long as this never hits techcrunch then i think that'll be fine
   	weekends.each do |weekend|
+  		
+  		already_grouped_event_indices.clear
+  		
   		weekend.each_with_index do |event, index|
   			#save our weekend off if it's big enough
-  			if new_location_group.size > minimum_number_of_events
+  			if new_location_group.size >= minimum_number_of_events
   				location_weekends.push(new_location_group.clone) #again, .clone because references 
-  				new_location_group.clear
   			end
   		
-  			
+  			new_location_group.clear
+  		
+  			if already_grouped_event_indices.has_key?(index) 
+  				next
+  			end
+  				
   			lat1 = event["event"]["venue"]["location"]["lat"]
   			long1 = event["event"]["venue"]["location"]["lon"]
   			title1 = event["event"]["title"]
-  			logger.info("outer loop event = " + title1)
-  			logger.info("j = " + j.to_s() + " index = " + index.to_s() + " top val = " + weekend.size.to_s())
+  			
   			#compare each array element with all events after it
   			for j in (index+1)..(weekend.size-1)
   
-  			  internal_loop_event = weekend[j]
+					if already_grouped_event_indices.has_key?(j)
+						next
+					end  
+ 
+ 				  internal_loop_event = weekend[j]
   			  lat2 = internal_loop_event["event"]["venue"]["location"]["lat"]
   			  long2 = internal_loop_event["event"]["venue"]["location"]["lon"]
   			  title2 = internal_loop_event["event"]["title"]
   			  
-  			  val = calculate_distance(lat1,long1,lat2,long2)
-  			  #logger.debug("event1 = " + title1 + " event2 = " + title2)
-  			  #logger.debug("lat1 = " + lat1.to_s() + " long1 = " + long1.to_s() + " lat2 = " + lat2.to_s() + " long2 = " + long2.to_s())
-  			  #logger.debug("i = " + index.to_s() + " j = " + j.to_s() + "distance = " + val.to_s())
+  			  val = calculate_distance(lat1,long1,lat2,long2) 
   			  
   			  if calculate_distance(lat1,long1,lat2,long2) < range_in_miles
+  			  
   			  	if new_location_group.size == 0
-  			  		logger.debug("added first event " + title1)
+  			  
   			  		new_location_group.push(event.clone)
+  			  		already_grouped_event_indices[index] = true
   			  	end
   			  	
   			  	new_location_group.push(internal_loop_event.clone)
-  			  	logger.debug("added second event " + title2)
+  			  	already_grouped_event_indices[j] = true
+  			  	
+  			  
   			  	
   			  end
   				
