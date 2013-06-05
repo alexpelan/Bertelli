@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
   <title>Bertelli</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= yield(:head) %>
 </head>
 <body class="<%= controller.controller_name %>">
-
-	<div id="wrapper">
+	
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+        	<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/">Bertelli</a>
+          <div class="nav-collapse collapse">
+          	<ul class="nav">
+	          	<li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
+							<li class="<%= 'active' if params[:controller] == 'search' %>" ><a href="/search">Add Interests</a></li>
+							<li class="<%= 'active' if params[:controller] == 'recommendations' %>"><a  href="/recommendations">Recommendations</a></li>
+							<li class="<%= 'active' if params[:controller] == 'about' %>"><a  href="/about">About</a>           
+          	</ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	
 		
-
-		<div id="main">
-		
-			<div id="centeredtabs">
-			  <%= tabs_tag :open_tabs => { :id=>"tabs" } do |tab| %>
-					<%= tab.home 'Home', home_path %>
-					<%= tab.search 'Add Interests', search_path %>
-					<%= tab.recommendations 'Recommendations', recommendations_path %>
-			  <% end %>	
-		  </div>
-		  
-			<div id="content">
-				<%= yield %>
+		<div class="container">	
+						
+		  <div class="content">
+		  	
+			  <div class="row">
+			  	<div class="span12">
+						<%= yield %>
+					</div>
+				</div>
 			</div>
-		</div>
+		</div> 
 		
-	</div>
 
 </body>
 </html>
