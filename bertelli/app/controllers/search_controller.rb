@@ -15,6 +15,7 @@ class SearchController < ApplicationController
   	file = open(query_string)
   	response = file.read
   	@performers = JSON.parse(response)
+  	
   end
 
   def destroy

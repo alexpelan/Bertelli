@@ -1,8 +1,11 @@
-<h2>Enter the performer you're interested in</h2>
-<%= form_tag do %>
-<div>
-  <%= label_tag :query, 'Search' %>
+<div class="well">
+<h2>Add Interests</h2>
+<%= form_tag("/search",:class=>"form-search") do %>
+
+  <%= label_tag :query, 'Search for your favorite musicians, sports teams, and comedians:' %>
   <%= text_field_tag :query, params[:query] %>
    <%= submit_tag "Search" %>
-</div>
+
 <% end %>
+
+</div>

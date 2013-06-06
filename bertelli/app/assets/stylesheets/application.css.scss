@@ -11,10 +11,10 @@
  *= require_self
  *= require_tree .
  */
-.button_to div{
-	display:inline;	
-}
-
 body{
 	padding:60px;	
+}
+
+.center{
+	text-align:center;
 }

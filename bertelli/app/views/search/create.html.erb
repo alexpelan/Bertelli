@@ -1,18 +1,24 @@
-<h2>Results</h2>
+<h2>Search Results</h2>
 
-<p>Your query was <%= @query %></p>
-
-<table>
+<ul class="thumbnails">
 
 <% @performers["performers"].each do |performer| %>
-	<tr>
-		<td>
-			<%= performer["name"] %>
-		</td>
-		
-		<td>
-		  <%= link_to 'Add to my interests', line_items_path(performer_id: performer["id"], name: performer["name"], ticket_url:performer["url"], image_url: performer["images"]["medium"]), :method => :post %>
-		</td>
-	</tr>
+	<li class="span4">
+		<div class="thumbnail">
+			<% if performer["images"]["large"].nil? %>
+				<%= image_tag("brokenimage.png") %>
+			<% else %>
+				<%= image_tag(performer["images"]["large"]) %>
+			<% end %>
+			<h4 class="center"> <%= performer["name"] %> 
+				<%= link_to 'Add', line_items_path(performer_id: performer["id"], name: performer["name"], ticket_url:performer["url"], image_url: performer["images"]["medium"]), :method => :post, :class=>"btn btn-primary" %>
+			</h4>
+		</div>
+	</li>
+
+	
+
+
 <% end %>
-</table>
+
+</ul>
