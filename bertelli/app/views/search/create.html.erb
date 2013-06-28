@@ -4,14 +4,14 @@
 
 <% @performers["performers"].each do |performer| %>
 	<li class="span4">
-		<div class="thumbnail">
+		<div class="thumbnail center">
 			<% if performer["images"]["large"].nil? %>
 				<%= image_tag("brokenimage.png") %>
 			<% else %>
 				<%= image_tag(performer["images"]["large"]) %>
 			<% end %>
-			<h4 class="center"> <%= performer["name"] %> 
-				<%= link_to 'Add', line_items_path(performer_id: performer["id"], name: performer["name"], ticket_url:performer["url"], image_url: performer["images"]["medium"]), :method => :post, :class=>"btn btn-primary" %>
+			<h4> <%= performer["name"] %> </h4>
+				<%= link_to 'Add', line_items_path(performer_id: performer["id"], name: performer["name"], ticket_url:performer["url"], image_url: performer["images"]["large"]), :method => :post, :class=>"btn btn-large btn-primary center" %>
 			</h4>
 		</div>
 	</li>

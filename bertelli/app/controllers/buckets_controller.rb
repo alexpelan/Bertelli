@@ -80,11 +80,21 @@ class BucketsController < ApplicationController
   # DELETE /buckets/1
   # DELETE /buckets/1.json
   def destroy
-    @bucket = Bucket.find(params[:id])
-    @bucket.destroy
+   @bucket = current_bucket
+   performer_id = params[:performer_id]
+   
+   
+   @bucket.line_items.each do |line_item|
+   	logger.debug("line item = " + line_item.performer_id.to_s() + " perf = " + performer_id.to_s())
+   	if line_item.performer_id.to_s() == performer_id.to_s()
+   		logger.debug("FOUND MATCH")
+   		line_item.delete
+   	end
+   end
+   
 
     respond_to do |format|
-      format.html { redirect_to buckets_url }
+      format.html { redirect_to @bucket }
       format.json { head :no_content }
     end
   end
