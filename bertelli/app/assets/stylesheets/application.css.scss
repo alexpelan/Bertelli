@@ -19,6 +19,16 @@ body{
 	text-align:center;
 }
 
-a.btn:visited {
+a.btn-primary:visited, a.btn-success:visited, a.btn-danger:visited {
 	 color: #fff; 
+}
+
+input.btn{
+	font-family: verdana;	
+}
+
+a.normal
+{
+	color:blue;
+	text-decoration:underline;	
 }

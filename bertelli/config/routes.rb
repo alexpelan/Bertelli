@@ -19,6 +19,8 @@ Bertelli::Application.routes.draw do
 
 
   resources :performers
+  
+  match '/about' => 'pages#about'
 
 
   # The priority is based upon order of creation:

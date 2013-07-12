@@ -1,12 +1,21 @@
-<h1>Recommendations</h1>
+<div class="well">
 
-<%= form_tag do %>
-<div>
-  <%= label_tag :postal_code, 'Enter the postal code of where you want to visit:' %>
-  <%= text_field_tag :postal_code, params[:postal_code] %>
-   <%= submit_tag "Search" %>
-   
+	<h2>Recommendations</h2>
+	
+	<%= form_tag do %>
+
+		  <%= label_tag :postal_code, 'Enter the postal code of where you want to visit:' %>
+		  <%= text_field_tag :postal_code, params[:postal_code] %>
+		  <p>
+		  <%= submit_tag "Search", :class=> "btn" %>
+		  <%= link_to "I'll go anywhere", {:action=> "list"}, :class=> "btn" %>
+		  </p>
+	<% end %>
+	
+
+	
+
+  
+	 
+
 </div>
-<% end %>
-
-Or: <%=button_to "I'll go anywhere", :action=> "list" %>
