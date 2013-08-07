@@ -44,7 +44,7 @@ class RecommendationsController < ApplicationController
   		end
   			
   	else
-	  	query_string = query_string + performers_string + postal_code_string + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=150"
+	  	query_string = query_string + performers_string + postal_code_string + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=50"
 	  	
 	  	@str = query_string
 	  	file = open(query_string)

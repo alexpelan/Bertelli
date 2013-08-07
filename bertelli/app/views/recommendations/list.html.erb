@@ -1,20 +1,55 @@
 <h1>Recommendations</h1>
 
-<table>
-<% @weekends.each do |weekend| %>
-	<tr>
-	  <b><%= calculate_date_string(weekend.first["event"]["datetime_local"]) %></b><br/>
-	  <table>
-			<% weekend.each do |event| %>
-				<tr>
-					 <td> <%= event["event"]["title"] %> </td>
-					 <td> <%= Date.parse(event["event"]["datetime_local"]) %> </td>
-					 <td> <%= link_to event["event"]["venue"]["name"], event["event"]["venue"]["url"] %> </td>
-					 <td> <%= event["event"]["venue"]["city"] %> </td>
-					 <td> <%= link_to "Buy tickets on Seatgeek", event["event"]["url"] %> </td>
-				</tr>
-			<% end %>
-		</table>
-	</tr>
-<% end %>	
-</table>
+<ul class="thumbnails">
+	<% @weekends.each do |weekend| %>
+		<li class="span12">
+			<div class="thumbnail">
+				<div class="weekendHeader">
+					<span class="citySpan">
+						<%= weekend.first["event"]["venue"]["display_location"] %>
+					</span>
+					<span class="dateSpan"> 
+				  	<%= calculate_date_string(weekend.first["event"]["datetime_local"]) %></b>
+				  </span>
+				</div>
+				<div class="weekendContent">
+					<!-- <div class="weekendImage thumbnail">
+						<%= image_tag( find_first_available_image(weekend) ) %>
+					</div>-->
+					<div class="weekendDetails">
+						<table class="table table-striped table-hover">
+							<tbody>
+								<% weekend.each do |event| %>
+									<tr>
+										<td width="55%">
+										 <%= truncate_string(event["event"]["title"], 75)%>
+										</td>
+										
+										<td width="10%">
+										 <%= format_date_day_month(event["event"]["datetime_local"])%>
+										</td>
+										
+										<!-- <td width="20%">
+										 <%= link_to event["event"]["venue"]["name"], event["event"]["venue"]["url"] %> 
+										</td> -->
+										
+										<td width="20%">
+										 <%= event["event"]["venue"]["display_location"] %> 
+										</td>
+									  
+									  <td style="text-align:right;" width="15%">
+									   <%= link_to "Buy tickets", event["event"]["url"], :class=>"btn btn-success" %> 
+										</td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="weekendFooter">
+					TODO: Flight details here
+				</div>
+			</div>
+		</li>
+	<% end %>	
+</ul>

@@ -8,7 +8,7 @@
 		  <%= text_field_tag :postal_code, params[:postal_code] %>
 		  <p>
 		  <%= submit_tag "Search", :class=> "btn" %>
-		  <%= link_to "I'll go anywhere", {:action=> "list"}, :class=> "btn" %>
+		  <%= link_to "I'll go anywhere", {:action=> "list"}, :method=> "post", :class=> "btn" %>
 		  </p>
 	<% end %>
 	
