@@ -12,9 +12,10 @@ module RecommendationsHelper
 			start_date = event_date - 1
 			end_date = event_date + 1
 		elsif event_date.wday == 0 #sunday
-			state_date = event_date - 2
+			start_date = event_date - 2
 			end_date = event_date
 		end
+		
 		date_string = start_date.to_time.strftime("%m/%d/%Y") + " - " + end_date.to_time.strftime("%m/%d/%Y")
 		
 		return date_string

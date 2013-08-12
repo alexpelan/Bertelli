@@ -21,13 +21,17 @@ class RecommendationsController < ApplicationController
    	else
   		postal_code_string = "&postal_code=" + postal_code
   	end
-  
+  	
   	delimiter = ""
   	@bucket.line_items.each do |performer|
   			performers_string = performers_string + delimiter + "performers.id=" + performer.performer_id.to_s()
   			delimiter = "&"
   	end
   	
+  	#don't even bother if they haven't added interests yet
+  	if performers_string.length == 0
+  		return
+  	end
   	
   	delimiter = ""
   	response = "{\"areas\":["
@@ -44,7 +48,7 @@ class RecommendationsController < ApplicationController
   		end
   			
   	else
-	  	query_string = query_string + performers_string + postal_code_string + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=50"
+	  	query_string = query_string + performers_string + postal_code_string + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=50&range=50mi"
 	  	
 	  	@str = query_string
 	  	file = open(query_string)
@@ -77,9 +81,7 @@ class RecommendationsController < ApplicationController
    	
    	#if they didn't provide a zip code, now we have to search through weekends to see if any events are in the same general area
    	if @ill_go_anywhere_mode 
-   		#let's go with...50 miles? left off here - this isn't working.
    		@weekends = group_by_location(@weekends, 2, 50)	
-   		#logger.debug("returned wknds size = " + @weekends.size.to_s())
    	end
    	
   end

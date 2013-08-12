@@ -1,9 +1,19 @@
+<% if @weekends.nil? %>
+	<div class="well">
+<% end %>
+
 <h1>Recommendations</h1>
+
+<% if @weekends.nil? %>
+		No results found.
+	</div>
+	
+<% else %>
 
 <ul class="thumbnails">
 	<% @weekends.each do |weekend| %>
 		<li class="span12">
-			<div class="thumbnail">
+			<div class="thumbnail" >
 				<div class="weekendHeader">
 					<span class="citySpan">
 						<%= weekend.first["event"]["venue"]["display_location"] %>
@@ -21,19 +31,19 @@
 							<tbody>
 								<% weekend.each do |event| %>
 									<tr>
-										<td width="55%">
-										 <%= truncate_string(event["event"]["title"], 75)%>
+										<td width="60%">
+										 <%= truncate_string(event["event"]["title"], 100)%>
 										</td>
 										
 										<td width="10%">
 										 <%= format_date_day_month(event["event"]["datetime_local"])%>
 										</td>
 										
-										<!-- <td width="20%">
+										<!-- Want to eventually capture this in a click-to-expand sort of way <td width="20%">
 										 <%= link_to event["event"]["venue"]["name"], event["event"]["venue"]["url"] %> 
 										</td> -->
 										
-										<td width="20%">
+										<td width="15%">
 										 <%= event["event"]["venue"]["display_location"] %> 
 										</td>
 									  
@@ -47,9 +57,10 @@
 					</div>
 				</div>
 				<div class="weekendFooter">
-					TODO: Flight details here
 				</div>
 			</div>
 		</li>
 	<% end %>	
 </ul>
+
+<% end %>
