@@ -18,8 +18,15 @@ class RecommendationsController < ApplicationController
   	
   	if postal_code.nil? 
   		@ill_go_anywhere_mode = true
-   	else
-  		postal_code_string = "&postal_code=" + postal_code
+   	else 
+   		postal_code = postal_code.to_i()
+   		
+   		#return with no results if the postal code is invalid
+   		if postal_code == 0
+   			return
+   		end
+ 
+  		postal_code_string = "&postal_code=" + postal_code.to_s()
   	end
   	
   	delimiter = ""
@@ -39,6 +46,7 @@ class RecommendationsController < ApplicationController
   		
   		CITIES.each_value do |postal_code|
   			city_query_string = query_string + performers_string + "&postal_code="+ postal_code + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=50"
+  			logger.info("zip = " + postal_code)
   			file = open(city_query_string)
   			temp_response = file.read
   			response = response + delimiter + temp_response
