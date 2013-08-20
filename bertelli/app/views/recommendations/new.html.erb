@@ -1,21 +1,24 @@
+<%= javascript_include_tag(:application) %>
+
 <div class="well">
 
-	<h2>Recommendations</h2>
+	<div id="recommendationForm">
+		<h2>Recommendations</h2>
+		
+		<%= form_tag do %>
 	
-	<%= form_tag do %>
-
-		  <%= label_tag :postal_code, 'Enter the postal code of where you want to visit:' %>
-		  <%= text_field_tag :postal_code, params[:postal_code] %>
-		  <p>
-		  <%= submit_tag "Search", :class=> "btn" %>
-		  <%= link_to "I'll go anywhere", {:action=> "list"}, :method=> "post", :class=> "btn" %>
-		  </p>
-	<% end %>
+			  <%= label_tag :postal_code, 'Enter the postal code of where you want to visit:' %>
+			  <%= text_field_tag :postal_code, params[:postal_code] %>
+			  <p>
+			  <%= submit_tag "Search", :class=> "btn showSpinner" %>
+			  <%= link_to "I'll go anywhere", {:action=> "list"}, :method=> "post", :class=> "btn showSpinner" %>
+			  </p>
+		<% end %>
+	</div>
 	
+	<div id="divLoading" class="hidden">
+		Searching... <%= image_tag "spinner.gif" %>
+	</div>
 
 	
-
-  
-	 
-
 </div>

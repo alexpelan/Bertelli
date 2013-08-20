@@ -11,6 +11,18 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+var showSpinnerImage = function(){
+		$("#divLoading").removeClass("hidden");
+		
+};
+
+//show spinner gif while searching for weekends
+$(document).ready(function(){
+		
+	$(".showSpinner").click(showSpinnerImage);
+	
+});
