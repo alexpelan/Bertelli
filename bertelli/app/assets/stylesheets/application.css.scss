@@ -57,3 +57,11 @@ ul.noBullets{
 ul.thumbnails.per3 > li:nth-child(3n+1) {
   clear: left;
 }
+
+.table td{
+	border-bottom: 1px solid #dddddd;	
+}
+
+a.imageLink:hover{
+	background: whitesmoke;	
+}
