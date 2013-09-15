@@ -3,7 +3,6 @@ require 'open-uri'
 
 class RecommendationsController < ApplicationController
 	include BertelliLib
-	set_tab :recommendations
 
 	#TODO: something about "fat models, skinny controllers" :-)
   def list

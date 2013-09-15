@@ -13,7 +13,6 @@ class BucketsController < ApplicationController
   # GET /buckets/1
   # GET /buckets/1.json
   def show
-  		set_tab :search
     @bucket = Bucket.find(params[:id])
     	   	@performers = Array.new
     	   	
