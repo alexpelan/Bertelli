@@ -1,0 +1,11 @@
+<div class="well">
+<h2>Add Interests</h2>
+<%= form_tag("/search",:class=>"form-search") do %>
+
+  <%= label_tag :query, 'Search for your favorite musicians, sports teams, and comedians:' %>
+  <%= text_field_tag :query, params[:query] %>
+   <%= submit_tag "Search", :class=>"btn"  %>
+
+<% end %>
+
+</div>

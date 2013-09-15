@@ -1,0 +1,36 @@
+// Place all the styles related to the Recommendations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.citySpan{
+	float: left;
+	font-weight: bold;
+	font-size: 18px;	
+}
+
+.dateSpan{
+	float: right;
+	font-weight: bold;
+	font-size: 14px;	
+}
+
+.weekendContent{
+	padding-top: 10px;
+	clear: both;	
+}
+
+.weekendImage{
+	float: left;
+	width: 20%;	
+}
+
+.weekendDetails{
+	width:100%;
+}
+
+.weekendFooter{
+	clear: both;	
+}
+
+.spanTicketButton{
+	float: right;	
+}
