@@ -40,7 +40,7 @@ Bertelli::Application.initialize!
  		"Oklahoma City, Oklahoma" => "73101",
  		"Milwaukee, Wisconsin" => "53201",
  		"Las Vegas, Nevada" => "89101",
- 		"Albuquerque, New Mexico" => "87101"
+ 		"Albuquerque, New Mexico" => "87101",
  		"Tucson, Arizona" => "85701",
  		"Kansas City, Missouri" => "64101",
  		"Virginia Beach, Virginia" => "23450",
