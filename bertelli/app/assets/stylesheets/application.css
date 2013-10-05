@@ -1,0 +1,91 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+ 
+body{
+	background-color:#ECEBEB;	
+}
+ 
+div#wrapper {
+ 		position:relative;
+ 		margin-left:auto;
+ 		margin-right:auto;
+ 		top:5px;
+ 		width:960px;
+ 		background-color:#FFFFFF;
+ }
+
+
+/* tabs */
+
+div#centeredtabs{
+	float:left;
+	width:100%;
+	overflow:hidden;
+	position:relative;
+}
+
+#centeredtabs ul{
+	position:relative;
+	margin:0;
+	padding:0;
+	list-style:none;
+	clear:left;
+	float:left;
+	left:50%;	
+	text-align:center;
+}
+
+#centeredtabs ul li{
+	display:block;
+	float:left;
+	list-style:none;
+	margin:0;
+	padding:0;
+	position:relative;
+	right:50%;
+	font-size:18px;
+}
+
+/*currently selected*/
+#centeredtabs ul li.current{
+	background:#FFFFFF;
+	font-weight:bold;
+	border-top:1px solid #aaa;
+	border-left:1px solid #aaa;
+	border-right:1px solid #aaa;
+	padding: 1em 1em;
+	margin:0;
+	border-bottom:none;
+		
+}
+
+#centeredtabs ul li a{
+	display:block;
+	color:#444;
+	text-decoration:none;
+	font-weight:bold;
+	background:#ddd;
+	margin:0;
+	padding:1em 1em;
+	border:1px solid #aaa;
+}	
+	
+#centeredtabs ul li a:hover,
+#centeredtabs ul li a:active{
+	background:#bbb;	
+}
+
+.button_to div{
+	display:inline;	
+}

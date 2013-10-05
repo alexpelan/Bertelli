@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Bertelli</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+</head>
+<body class="<%= controller.controller_name %>">
+	
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+        	<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/">Bertelli</a>
+          <div class="nav-collapse collapse">
+          	<ul class="nav">
+	          	<li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
+							<li class="<%= 'active' if params[:controller] == 'search' %>" ><a href="/search">Add Interests</a></li>
+							<li class="<%= 'active' if params[:controller] == 'recommendations' %>"><a  href="/recommendations">Recommendations</a></li>
+							<li class="<%= 'active' if params[:controller] == 'about' %>"><a  href="/about">About</a>           
+          	</ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+	
+		
+		<div class="container">	
+						
+		  <div class="content">
+		  	
+			
+						<%= yield %>
+				</div>
+			</div>
+		</div> 
+		
+
+</body>
+</html>
