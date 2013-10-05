@@ -45,6 +45,8 @@
 			</div>
 		</div> 
 		
+<!-- Google analytics support in production only -->
+<%= render :partial=> 'layouts/googleanalytics' if Rails.env == 'production' %>
 
 </body>
 </html>
