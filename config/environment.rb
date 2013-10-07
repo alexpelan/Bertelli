@@ -4,8 +4,6 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Bertelli::Application.initialize!
 
- #Seatgeek API key
- SEATGEEK_API_CLIENT_ID = "MjM4ODE5fDEzNjIzNjMwNDg"
  #Array of top 25 cities by population according to 
  # http://en.wikipedia.org/wiki/List_of_United_States_cities_by_population#Cities_formerly_over_100.2C000_people
  CITIES = {

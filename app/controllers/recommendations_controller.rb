@@ -3,12 +3,11 @@ require 'open-uri'
 
 class RecommendationsController < ApplicationController
 	include BertelliLib
+	include ExternalApis
 
-	#TODO: something about "fat models, skinny controllers" :-)
   def list
   	@bucket = current_bucket
-  	#todo -  do something if they haven't added anything
-  	query_string = "http://api.seatgeek.com/2/recommendations?"
+  
   	performers_string = ""
   	postal_code_string = ""
   	response = ""
@@ -27,46 +26,20 @@ class RecommendationsController < ApplicationController
  
   		postal_code_string = "&postal_code=" + postal_code.to_s()
   	end
+  		
+  	sg = Seatgeek.new
   	
-  	delimiter = ""
-  	@bucket.line_items.each do |performer|
-  			performers_string = performers_string + delimiter + "performers.id=" + performer.performer_id.to_s()
-  			delimiter = "&"
-  	end
-  	
-  	#don't even bother if they haven't added interests yet
-  	if performers_string.length == 0
-  		return
-  	end
-  	
-  	delimiter = ""
-  	response = "{\"areas\":["
   	if @ill_go_anywhere_mode
   		
-  		CITIES.each_value do |postal_code|
-  			city_query_string = query_string + performers_string + "&postal_code="+ postal_code + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=50"
-  			logger.info("zip = " + postal_code)
-  			file = open(city_query_string)
-  			temp_response = file.read
-  			response = response + delimiter + temp_response
-  			delimiter = ","
-  			file.close
-  			
-  		end
-  			
+  		@recommendations = sg.recommendations(@bucket, nil)
+  		
   	else
-	  	query_string = query_string + performers_string + postal_code_string + "&client_id=" + SEATGEEK_API_CLIENT_ID + "&per_page=50&range=50mi"
-	  	
-	  	@str = query_string
-	  	file = open(query_string)
-	  	temp_response = file.read
-	  	response = response + temp_response
+			
+			@recommendations = sg.recommendations(@bucket, postal_code_string)
 	  	
 	  end
-	 
-	  response = response + "]}"
 	  
-	  @recommendations = JSON.parse(response)
+	  logger.debug("reccomendations = " + @recommendations.to_s())
 	  
   	@weekend_events = Hash.new
   	
