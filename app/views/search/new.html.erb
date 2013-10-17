@@ -1,11 +1,20 @@
 <div class="well">
 <h2>Add Interests</h2>
-<%= form_tag("/search",:class=>"form-search") do %>
+<%= form_tag("/search", remote:true) do %>
 
   <%= label_tag :query, 'Search for your favorite musicians, sports teams, and comedians:' %>
   <%= text_field_tag :query, params[:query] %>
-   <%= submit_tag "Search", :class=>"btn"  %>
+  <%= submit_tag "Search", :class=>"btn", remote: true %>
 
 <% end %>
 
+
+</div>
+
+<div id="results">
+	<!-- results get inserted here via javascript magic -->
+</div>
+
+<div id="user_interests">
+	<!-- bucket gets inserted here via javascript magic -->
 </div>

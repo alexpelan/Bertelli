@@ -41,6 +41,7 @@ class LineItemsController < ApplicationController
   # POST /line_items.json
   def create
     @bucket = current_bucket
+    @performers = Array.new
     #get values from URL
     performer_id = params[:performer_id]
     name = params[:name]
@@ -60,14 +61,19 @@ class LineItemsController < ApplicationController
 		performer.save
 	
 		
-		
     @line_item = @bucket.line_items.build
     @line_item.performer_id = performer_id
+    
+    #load up performer data for display
+   	@bucket.line_items.each do | line_item | 
+   		@performers.push(Performer.find(line_item.performer_id))
+   	end
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @bucket, notice: 'Line item was successfully created.' }
-        format.json { render json: @bucket, status: :created, location: @bucket}
+        format.html { redirect_to search_path }
+        format.js   {}
+        format.json { render json: @bucket}
       else
         format.html { render action: "http://www.google.com" }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }

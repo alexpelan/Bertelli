@@ -14,14 +14,9 @@ class BucketsController < ApplicationController
   # GET /buckets/1.json
   def show
     @bucket = Bucket.find(params[:id])
-    	   	@performers = Array.new
-    	   	
-    	   	#load up performer data for display
-    	   	@bucket.line_items.each do | line_item | 
-    	   		@performers.push(Performer.find(line_item.performer_id))
-    	   	end
-    		
-
+   	@performers = Array.new
+   	
+  
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @bucket }
@@ -80,20 +75,24 @@ class BucketsController < ApplicationController
   # DELETE /buckets/1.json
   def destroy
    @bucket = current_bucket
+   @performers = Array.new
    performer_id = params[:performer_id]
    
    
    @bucket.line_items.each do |line_item|
-   	logger.debug("line item = " + line_item.performer_id.to_s() + " perf = " + performer_id.to_s())
    	if line_item.performer_id.to_s() == performer_id.to_s()
-   		logger.debug("FOUND MATCH")
    		line_item.delete
+   	else
+   		@performers.push(Performer.find(line_item.performer_id))
+   		performer = Performer.find(line_item.performer_id)
+   		logger.debug("perf = " + performer.name)
    	end
    end
-   
+   	
 
     respond_to do |format|
-      format.html { redirect_to @bucket }
+      format.html { redirect_to search_path }
+      format.js   {}
       format.json { head :no_content }
     end
   end
