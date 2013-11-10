@@ -5,13 +5,13 @@
 	<div id="recommendationForm">
 		<h2>Recommendations</h2>
 		
-		<%= form_tag do %>
+		<%= form_tag("/recommendations", remote: true) do %>
 	
 			  <%= label_tag :postal_code, 'Enter the postal code of where you want to visit:' %>
 			  <%= text_field_tag :postal_code, params[:postal_code] %>
 			  <p>
-			  <%= submit_tag "Search", :class=> "btn showSpinner" %>
-			  <%= link_to "I'll go anywhere", {:action=> "list"}, :method=> "post", :class=> "btn showSpinner" %>
+			  <%= submit_tag "Search", :class=> "btn showSpinner", remote: true %>
+			  <%= link_to "I'll go anywhere", {:action=> "list"}, :method=> "post", :class=> "btn showSpinner", remote: true %>
 			  </p>
 		<% end %>
 	</div>
@@ -21,4 +21,8 @@
 	</div>
 
 	
+</div>
+
+<div id="results">
+
 </div>

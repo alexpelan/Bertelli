@@ -39,12 +39,13 @@ class RecommendationsController < ApplicationController
 	  	
 	  end
 	  
-	  logger.debug("reccomendations = " + @recommendations.to_s())
-	  
+	  if @recommendations.nil?
+	  	return
+	  end
+	   
   	@weekend_events = Hash.new
   	
     @recommendations["areas"].each do |city|
-	  	#@recommendations["recommendations"].each do |recommendation|
 	  	city["recommendations"].each do |recommendation|
 	  		event_date = Date.new
 	    	event_date = Date.parse(recommendation["event"]["datetime_local"])
@@ -63,6 +64,11 @@ class RecommendationsController < ApplicationController
    	if @ill_go_anywhere_mode 
    		@weekends = group_by_location(@weekends, 2, 50)	
    	end
+   	
+   	respond_to do |format|
+  		format.html { redirect_to recommendations_path}
+  		format.js
+  	end
    	
   end
   
