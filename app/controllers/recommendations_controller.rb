@@ -59,7 +59,7 @@ class RecommendationsController < ApplicationController
    	
    	#here's where the magic happens. Hardcoding minimum number of events to 2 for now
    	@weekends = group_into_weekends(@weekend_events, 2)
-   	
+   	 	
    	#if they didn't provide a zip code, now we have to search through weekends to see if any events are in the same general area
    	if @ill_go_anywhere_mode 
    		@weekends = group_by_location(@weekends, 2, 50)	
@@ -100,13 +100,15 @@ class RecommendationsController < ApplicationController
   	
   	#iterate through hash in date order
   	sorted_events.each do |event, event_date|
-  		
+  	  		
   		#if this isn't the first event within a weekend, check if this event is within 2 days of the previous one
   		#if it is, it's part of that weekend (and can't be part of the next weekend, because math)
  			if weekend.size > 0
  				if event_date - previous_date <= 2			  
- 					weekend.push(event.clone)
- 					previous_date = event_date
+ 					if is_duplicate_event(weekend,event) == false #some of the areas we search may overlap so we can get duplicates
+		 					weekend.push(event.clone)
+		 					previous_date = event_date
+		 			end
  				else
  					need_to_create_new_weekend = true
  				end
@@ -200,6 +202,18 @@ class RecommendationsController < ApplicationController
   	end
   	
   	return location_weekends
+  end
+  
+  def is_duplicate_event(weekend, event)
+  
+  	weekend.each do |stored_event| #event title and event date is good enough for me
+  		if stored_event["event"]["title"] == event["event"]["title"] && stored_event["event"]["datetime_local"] == event["event"]["datetime_local"]
+  			return true
+  		end
+  	end
+
+		return false
+
   end
   
  

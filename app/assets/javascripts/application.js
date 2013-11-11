@@ -17,6 +17,7 @@
 //= require_tree .
 var showSpinnerImage = function(){
 		$("#divLoading").removeClass("hidden");
+		$("#results").empty();
 		
 };
 

@@ -3,8 +3,8 @@
 <%= form_tag("/search", remote:true) do %>
 
   <%= label_tag :query, 'Search for your favorite musicians, sports teams, and comedians:' %>
-  <%= text_field_tag :query, params[:query] %>
-  <%= submit_tag "Search", :class=>"btn", remote: true %>
+  <%= text_field_tag :query, params[:query]%>
+  <%= submit_tag "Search", :class=>"btn lineButtonUp", remote: true %>
 
 <% end %>
 
